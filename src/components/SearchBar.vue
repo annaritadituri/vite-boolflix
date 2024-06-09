@@ -22,7 +22,7 @@
 
     <input
         type="text"
-        v-model="store.searchMovie"
+        v-model="store.search"
         @keyup.enter="$emit('searchMovies')"
     >
     <button

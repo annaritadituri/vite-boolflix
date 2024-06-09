@@ -1,7 +1,7 @@
 <script>
 
 import SearchBar from './components/SearchBar.vue';
-import MoviesList from './components/MoviesList.vue';
+import List from './components/List.vue';
 
 import { store } from './store';
 import axios from 'axios';
@@ -11,23 +11,27 @@ export default {
     data() {
         return {
             store,
-            showMoviesResults: false,
+            showResults: false,
         }
     },
 
     components: {
         SearchBar,
-        MoviesList,
+        List,
     },
 
     methods: {
 
         searchMovies() {
 
-            this.showMoviesResults = false;
+            this.showResults = false;
 
-            if(this.store.searchMovie) {
+            if(this.store.search) {
+
                 this.apiCallMovies();
+                this.store.flagLang = [];
+                this.apiCallTV();
+
             }
 
         },
@@ -37,18 +41,34 @@ export default {
             axios.get(this.store.apiInfo.url + this.store.apiInfo.endpoints.movies, {
                 params: {
                     api_key: this.store.apiInfo.apiKey,
-                    query: this.store.searchMovie,
+                    query: this.store.search,
                 }
             }).then((response) => {
 
-                this.store.info = response.data;
+                this.store.infoMovies = response.data;
                 this.store.movies = response.data.results;
-                this.showMoviesResults = true;
+                this.showResults = true;
 
             });
 
-        }
+        },
 
+        apiCallTV() {
+
+            axios.get(this.store.apiInfo.url + this.store.apiInfo.endpoints.tv, {
+                params: {
+                    api_key: this.store.apiInfo.apiKey,
+                    query: this.store.search,
+                }
+            }).then((response) => {
+
+                this.store.infoTv = response.data;
+                this.store.tv = response.data.results;
+                this.showResults = true;
+    
+            });
+
+        },
 
     }
 
@@ -60,7 +80,7 @@ export default {
 
     <div
         class="search container d-flex align-items-center justify-content-center vh-100"
-        v-if="showMoviesResults === false"
+        v-if="showResults === false"
     >
         <SearchBar
             @searchMovies="searchMovies()"
@@ -75,7 +95,7 @@ export default {
         <SearchBar
             @searchMovies="searchMovies()"
         />
-        <MoviesList />
+        <List />
 
     </div>
 
