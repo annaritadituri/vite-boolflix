@@ -95,7 +95,13 @@ export default {
         <SearchBar
             @searchMovies="searchMovies()"
         />
-        <List />
+
+        <div v-if="showResults === true" class="container">
+            <List />
+        </div>
+        <div v-else class="container">
+            Caricamento in corso...
+        </div>
 
     </div>
 

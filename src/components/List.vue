@@ -13,6 +13,7 @@
             return {
                 country,
                 store,
+                starRating: 0,
             };
 
         },
@@ -47,7 +48,21 @@
 
             },
 
-            
+            calculateRatings(index) {
+
+                this.starRating = (5 * this.store.movies[index].vote_average) / 10;
+                let less = this.starRating - parseInt(this.starRating);
+                let more = Math.ceil(this.starRating) - this.starRating;
+                if(more <= less) {
+                    this.starRating = Math.ceil(this.starRating);
+                } else {
+                    this.starRating = parseInt(this.starRating);
+                }
+
+                return this.starRating;
+
+            },
+
 
         },
         
@@ -62,28 +77,59 @@
 
 <template>
 
-    <div class="list" v-for="(movie, index) in store.movies">
+    <div class="container">
+        
+        <h2>Film</h2>
 
-        <MovieComponent
-            :title="movie.title"
-            :originalTitle="movie.original_title"
-            :lang="movie.original_language"
-            :flag="setLangMovies(index)"
-            :ratings="movie.vote_average"
-        />
+        <div class="row">
+
+            <div class="list col" v-for="(movie, index) in store.movies">
+
+                <MovieComponent
+                    :poster="this.store.apiInfo.urlImg + this.store.apiInfo.endpoints.format + this.store.apiInfo.endpoints.path + movie.poster_path"
+                    :title="movie.title"
+                    :originalTitle="movie.original_title"
+                    :lang="movie.original_language"
+                    :flag="setLangMovies(index)"
+                    :ratings="calculateRatings(index)"
+                />
+
+            </div>
+
+        </div>
 
     </div>
 
-    <div class="list" v-for="(tv, index) in store.tv">
+    <div class="container">
 
-        <TvComponent
-            :title="tv.name"
-            :originalTitle="tv.original_name"
-            :lang="tv.original_language"
-            :flag="setLangTv(index)"
-            :ratings="tv.vote_average"
-        />
+        <h2>Serie tv</h2>
+
+        <div class="row">
+
+            <div class="list col" v-for="(tv, index) in store.tv">
+
+                <TvComponent
+                    :poster="this.store.apiInfo.urlImg + this.store.apiInfo.endpoints.format + this.store.apiInfo.endpoints.path + tv.poster_path"
+                    :title="tv.name"
+                    :originalTitle="tv.original_name"
+                    :lang="tv.original_language"
+                    :flag="setLangTv(index)"
+                    :ratings="tv.vote_average"
+                />
+
+            </div>
+
+        </div>
 
     </div>
-
+    
 </template>
+
+<style scoped>
+
+.col {
+    width: 20%;
+    flex: 0 1 auto;
+}
+
+</style>
