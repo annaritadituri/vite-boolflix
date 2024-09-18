@@ -79,28 +79,40 @@ export default {
 <template>
 
     <div
-        class="search container d-flex align-items-center justify-content-center vh-100"
+        class="search page d-flex flex-column align-items-center vh-100 vw-100 m-0"
         v-if="showResults === false"
     >
-        <SearchBar
-            @searchMovies="searchMovies()"
-        />
+
+        <div class="content">
+
+            <img src="./assets/img/netflix-logo.png.webp" alt="logo-netflix">
+            <SearchBar
+                class="position-absolute bottom-50 start-50 translate-middle"
+                @searchMovies="searchMovies()"
+            />
+
+        </div>
+
     </div>
 
     <div
-        class="list container"
+        class="list page"
         v-else
     >
 
-        <SearchBar
-            @searchMovies="searchMovies()"
-        />
+        <div class="container">
 
-        <div v-if="showResults === true" class="container">
-            <List />
-        </div>
-        <div v-else class="container">
-            Caricamento in corso...
+            <SearchBar
+                @searchMovies="searchMovies()"
+            />
+
+            <div v-if="showResults === true" class="container">
+                <List />
+            </div>
+            <div v-else class="container">
+                Caricamento in corso...
+            </div>
+
         </div>
 
     </div>
@@ -110,4 +122,14 @@ export default {
 </template>
 
 <style scoped>
+
+    .page {
+
+        background-color: black;
+
+        img {
+            width: 40vw;
+        }
+    }
+
 </style>
