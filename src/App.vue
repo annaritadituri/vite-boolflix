@@ -1,5 +1,6 @@
 <script>
 
+import HeaderComponent from './components/HeaderComponent.vue';
 import SearchBar from './components/SearchBar.vue';
 import List from './components/List.vue';
 
@@ -16,6 +17,7 @@ export default {
     },
 
     components: {
+        HeaderComponent,
         SearchBar,
         List,
     },
@@ -100,16 +102,19 @@ export default {
         v-else
     >
 
-        <div class="container">
+        <HeaderComponent/>
+        <div class="container-fluid ms-2">
 
+            <!--
             <SearchBar
                 @searchMovies="searchMovies()"
             />
+            -->
 
-            <div v-if="showResults === true" class="container">
+            <div v-if="showResults === true" class="container-fluid">
                 <List />
             </div>
-            <div v-else class="container">
+            <div v-else class="container-fluid">
                 Caricamento in corso...
             </div>
 

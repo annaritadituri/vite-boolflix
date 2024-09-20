@@ -5,6 +5,28 @@
         name: 'Movie Component',
         props: ['poster', 'title', 'originalTitle', 'lang', 'flag', 'ratings'],
 
+        data() {
+            return {
+                cardVisibility: 'd-none'
+            }
+        },
+
+        methods: {
+
+            setFallbackImage(event) {
+                event.target.src = 'https://timescineplex.com/times/img/no-poster.png';
+            },
+
+            setCardOn() {
+                this.cardVisibility = 'd-block';
+            },
+
+            setCardOff() {
+                this.cardVisibility = 'd-none';
+            },
+
+        },
+
         computed: {
             displayFlag() {
                 if(this.flag === 'xx') return `unknown-flag`
@@ -18,23 +40,25 @@
 
 <template>
 
-    <div class="card">
+    <div
+        class="card w-100 h-100 text-bg-dark border-0"
+        @mouseenter.self="setCardOn"
+        @mouseleave.self="setCardOff"
+    >
 
-        <img :src="poster" class="card-img-top" alt="">
+        <img :src="poster" class="card-img h-100" alt="poster" @error="setFallbackImage">
 
-        <div class="card-body">
+        <div class="card-img-overlay flex-column align-content-center text-center" :class="cardVisibility">
 
-            <div class="card-header">
-                <p>{{ title }}</p>
-            </div>
-            <ul class="list-group list-group-flush">
+            <h2 class="card-title">{{ title }}</h2>
+            <ul class="list-unstyled">
 
-                <li class="list-group-item">{{ originalTitle }}</li>
-                <li class="list-group-item">
-                    {{ lang }}
-                    <p class=" text-nowrap fi fis" :class="displayFlag"></p>
+                <li><p class="card-text">Titolo originale: {{ originalTitle }}</p></li>
+                <li>
+                    Lingua: {{ lang }}
+                    <p class="text-nowrap fi fis" :class="displayFlag"></p>
                 </li>
-                <li class="list-group-item">{{ ratings }}</li>
+                <li><p class="card-text">Recensioni: {{ ratings }}</p></li>
 
             </ul>
 
@@ -46,16 +70,14 @@
 
 <style scoped>
 
-.card {
-    width: 100%;
-    height: 100%;
-}
-
-.unknown-flag:after {
-    background-color: red;
-    content: "flag not found";
-    display: inline-block;
-    width: fit-content;
-}
+    .card-img-overlay {
+        background-color: rgba(0, 0, 0, 0.484);
+    }
+    .unknown-flag:after {
+        background-color: red;
+        content: "_";
+        display: inline-block;
+        width: fit-content;
+    }
 
 </style>

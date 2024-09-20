@@ -77,13 +77,13 @@
 
 <template>
 
-    <div class="container">
+    <div class="container-fluid mb-5 mt-3">
         
-        <h2>Film</h2>
+        <h2 class="text-center text-uppercase">Film</h2>
 
         <div class="row">
 
-            <div class="list col" v-for="(movie, index) in store.movies">
+            <div class="list col g-4" v-for="(movie, index) in store.movies">
 
                 <MovieComponent
                     :poster="this.store.apiInfo.urlImg + this.store.apiInfo.endpoints.format + this.store.apiInfo.endpoints.path + movie.poster_path"
@@ -100,13 +100,13 @@
 
     </div>
 
-    <div class="container">
+    <div class="container-fluid py-5">
 
-        <h2>Serie tv</h2>
+        <h2 class="text-center text-uppercase">Serie tv</h2>
 
         <div class="row">
 
-            <div class="list col" v-for="(tv, index) in store.tv">
+            <div class="list col g-4" v-for="(tv, index) in store.tv">
 
                 <TvComponent
                     :poster="this.store.apiInfo.urlImg + this.store.apiInfo.endpoints.format + this.store.apiInfo.endpoints.path + tv.poster_path"
@@ -127,9 +127,20 @@
 
 <style scoped>
 
-.col {
-    width: 20%;
-    flex: 0 1 auto;
-}
+    * {
+        font-family: "Bebas Neue", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    h2 {
+        font-size: 3rem;
+        color: rgb(227, 12, 20);
+        letter-spacing: 1.5rem;
+    }
+    .col {
+        width: 230px;
+        flex: 0 1 auto;
+    }
 
 </style>
