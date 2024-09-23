@@ -111,7 +111,7 @@ export default {
             />
             -->
 
-            <div v-if="showResults === true" class="container-fluid">
+            <div v-if="showResults === true" class="container-fluid py-5">
                 <List />
             </div>
             <div v-else class="container-fluid">

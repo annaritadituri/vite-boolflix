@@ -81,7 +81,7 @@
         
         <h2 class="text-center text-uppercase">Film</h2>
 
-        <div class="row">
+        <div class="row flex-nowrap overflow-x-scroll">
 
             <div class="list col g-4" v-for="(movie, index) in store.movies">
 
@@ -104,7 +104,7 @@
 
         <h2 class="text-center text-uppercase">Serie tv</h2>
 
-        <div class="row">
+        <div class="row flex-nowrap overflow-auto">
 
             <div class="list col g-4" v-for="(tv, index) in store.tv">
 
@@ -140,7 +140,7 @@
     }
     .col {
         width: 230px;
-        flex: 0 1 auto;
+        flex: 0 0 auto;
     }
 
 </style>

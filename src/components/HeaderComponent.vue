@@ -1,8 +1,17 @@
 <script>
 
+    import SearchBar from './SearchBar.vue';
+
     export default {
-        name: 'Header Component'
-    }
+
+        name: 'Header Component',
+
+        components: {
+            SearchBar,
+        },
+    };
+
+    
 
 </script>
 
@@ -20,18 +29,17 @@
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Serie TV</a>
+                    <a class="nav-link disabled" aria-disabled="true">Serie TV</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Film</a>
+                    <a class="nav-link disabled" aria-disabled="true">Film</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">La mia lista</a>
+                    <a class="nav-link disabled" aria-disabled="true">La mia lista</a>
                 </li>
             </ul>
             <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <SearchBar/>
             </form>
             </div>
         </div>
